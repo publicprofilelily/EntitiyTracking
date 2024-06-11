@@ -23,9 +23,22 @@ class Program
     {
         var services = new ServiceCollection();
 
+
+        // Get the base directory of the application
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+        // Navigate to the desired directory relative to the base directory
+        string targetDirectory = Path.Combine(baseDirectory, @"..\..\..\");
+
+        // Normalize the path
+        targetDirectory = Path.GetFullPath(targetDirectory);
+
+        // Verify the change
+        Console.WriteLine("Target Directory: " + targetDirectory);
+
         // Build configuration
         var configuration = new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .SetBasePath(targetDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
